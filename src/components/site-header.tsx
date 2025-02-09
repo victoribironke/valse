@@ -19,6 +19,11 @@ const SiteHeader = () => {
   const { toggleSidebar } = useSidebar();
   const pathname = usePathname();
 
+  const mapping = {
+    [PAGES.top]: "Top",
+    [PAGES.stats]: "Statistics",
+  };
+
   return (
     <header className="fle sticky top-0 z-50 w-full items-center border-b bg-background">
       <div className="flex h-[--header-height] w-full items-center gap-2 px-4">
@@ -42,10 +47,14 @@ const SiteHeader = () => {
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
-            {/* <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-            </BreadcrumbItem> */}
+            {pathname !== "/dashboard" && (
+              <>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{mapping[pathname]}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </>
+            )}
           </BreadcrumbList>
         </Breadcrumb>
         {/* <SearchForm className="w-full sm:ml-auto sm:w-auto" /> */}
