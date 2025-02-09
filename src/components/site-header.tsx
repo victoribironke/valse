@@ -1,8 +1,6 @@
-"use client"
+"use client";
 
-import { SidebarIcon } from "lucide-react"
-
-import { SearchForm } from "@/components/search-form"
+import { SidebarIcon } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,13 +8,16 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { useSidebar } from "@/components/ui/sidebar"
+} from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { useSidebar } from "@/components/ui/sidebar";
+import { PAGES } from "@/constants/constants";
+import { usePathname } from "next/navigation";
 
-export function SiteHeader() {
-  const { toggleSidebar } = useSidebar()
+const SiteHeader = () => {
+  const { toggleSidebar } = useSidebar();
+  const pathname = usePathname();
 
   return (
     <header className="fle sticky top-0 z-50 w-full items-center border-b bg-background">
@@ -33,18 +34,24 @@ export function SiteHeader() {
         <Breadcrumb className="hidden sm:block">
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="#">
-                Building Your Application
-              </BreadcrumbLink>
+              {pathname === "/dashboard" ? (
+                <BreadcrumbPage>Dashboard</BreadcrumbPage>
+              ) : (
+                <BreadcrumbLink href={PAGES.dashboard}>
+                  Dashboard
+                </BreadcrumbLink>
+              )}
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            {/* <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-            </BreadcrumbItem>
+            </BreadcrumbItem> */}
           </BreadcrumbList>
         </Breadcrumb>
-        <SearchForm className="w-full sm:ml-auto sm:w-auto" />
+        {/* <SearchForm className="w-full sm:ml-auto sm:w-auto" /> */}
       </div>
     </header>
-  )
-}
+  );
+};
+
+export { SiteHeader };

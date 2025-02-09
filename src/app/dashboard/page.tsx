@@ -1,8 +1,8 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { SiteHeader } from "@/components/site-header"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-export default function Page() {
+const Page = () => {
   return (
     <div className="[--header-height:calc(theme(spacing.14))]">
       <SidebarProvider className="flex flex-col">
@@ -22,5 +22,7 @@ export default function Page() {
         </div>
       </SidebarProvider>
     </div>
-  )
-}
+  );
+};
+
+export default Page;
