@@ -2,18 +2,11 @@
 
 import * as React from "react";
 import {
-  BookOpen,
-  Bot,
   ChartNoAxesColumn,
   Command,
-  Frame,
   House,
   LifeBuoy,
-  Map,
-  PieChart,
   Send,
-  Settings2,
-  SquareTerminal,
   TrendingUp,
 } from "lucide-react";
 import { MainNav } from "@/components/main-nav";
