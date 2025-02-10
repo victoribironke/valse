@@ -45,4 +45,5 @@ const TableRowComp = (props: RecentlyPlayedTrack) => {
     </TableRow>
   );
 };
+
 export default TableRowComp;

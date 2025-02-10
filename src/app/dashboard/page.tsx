@@ -11,13 +11,6 @@ import { Clock3, MonitorSpeaker } from "lucide-react";
 const Page = () => {
   return (
     <div className="flex flex-col gap-4 p-4">
-      {/* <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-        <div className="aspect-video rounded-xl bg-muted/50" />
-        <div className="aspect-video rounded-xl bg-muted/50" />
-        <div className="aspect-video rounded-xl bg-muted/50" />
-      </div>
-      <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" /> */}
-
       <h2 className="text-main text-2xl md:text-3xl font-medium">
         Currently playing
       </h2>
@@ -30,7 +23,7 @@ const Page = () => {
           </Avatar>
 
           <div className="flex flex-col justify-center mr-auto">
-            <p className="text-xl font-medium">JUBA</p>
+            <p className="text-xl font-semibold">JUBA</p>
             <p className="text-sm text-muted-foreground">Anendlessocean</p>
           </div>
 
@@ -56,7 +49,6 @@ const Page = () => {
       </h2>
 
       <Table>
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
           <TableRow>
             <TableHead>#</TableHead>
