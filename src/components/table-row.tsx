@@ -39,7 +39,7 @@ const TableRowComp = (props: RecentlyPlayedTrack) => {
       </TableCell>
       <TableCell>{props.artists.join(", ")}</TableCell>
       <TableCell>{props.album}</TableCell>
-      <TableCell>
+      <TableCell className="text-right">
         {props.duration} • {props.played_at} ago
       </TableCell>
     </TableRow>

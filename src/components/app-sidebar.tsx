@@ -2,10 +2,12 @@
 
 import * as React from "react";
 import {
+  BadgeCheck,
   ChartNoAxesColumn,
   Command,
   House,
   LifeBuoy,
+  LogOut,
   Send,
   TrendingUp,
 } from "lucide-react";
@@ -57,6 +59,16 @@ const data = {
       url: "#",
       icon: Send,
     },
+    {
+      title: "Account",
+      url: "#",
+      icon: BadgeCheck,
+    },
+    {
+      title: "Log out",
+      url: "#",
+      icon: LogOut,
+    },
   ],
 };
 
@@ -86,9 +98,9 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
         <MainNav items={data.mainNav} />
         <BottomNav items={data.bottomNav} className="mt-auto" />
       </SidebarContent>
-      <SidebarFooter>
+      {/* <SidebarFooter>
         <NavUser user={data.user} />
-      </SidebarFooter>
+      </SidebarFooter> */}
     </Sidebar>
   );
 };

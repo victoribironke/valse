@@ -1,5 +1,6 @@
 "use client";
 
+import PageLoader from "@/components/page-loader";
 import { TopArtistComp, TopTrackComp } from "@/components/top";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,6 +11,9 @@ const Page = () => {
   const durations = ["4 weeks", "6 months", "1 year"];
   const [tab, setTab] = useState("tracks");
   const [duration, setDuration] = useState("4 weeks");
+  const [loading, setLoading] = useState(false);
+
+  if (loading) return <PageLoader fullScreen />;
 
   return (
     <div className="flex flex-col gap-4 p-4">

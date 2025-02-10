@@ -1,3 +1,6 @@
+"use client";
+
+import PageLoader from "@/components/page-loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Table,
@@ -7,8 +10,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Clock3, MonitorSpeaker } from "lucide-react";
+import { useState } from "react";
 
 const Page = () => {
+  const [loading, setLoading] = useState(false);
+
+  if (loading) return <PageLoader fullScreen />;
+
   return (
     <div className="flex flex-col gap-4 p-4">
       <h2 className="text-main text-2xl md:text-3xl font-medium">
@@ -55,7 +63,7 @@ const Page = () => {
             <TableHead>Title</TableHead>
             <TableHead>Artist(s)</TableHead>
             <TableHead>Album</TableHead>
-            <TableHead>
+            <TableHead className="flex justify-end items-center">
               <Clock3 size={18} />
             </TableHead>
           </TableRow>
