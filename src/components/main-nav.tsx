@@ -22,12 +22,12 @@ const MainNav = ({
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       {/* <SidebarGroupLabel>Projects</SidebarGroupLabel> */}
       <SidebarMenu>
-        {items.map((it, i) => (
+        {items.map((item, i) => (
           <SidebarMenuItem key={i}>
             <SidebarMenuButton asChild size="default">
-              <Link href={it.url}>
-                <it.icon />
-                <span>{it.title}</span>
+              <Link href={item.url}>
+                <item.icon />
+                <span>{item.title}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

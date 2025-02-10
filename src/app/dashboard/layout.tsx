@@ -20,7 +20,7 @@ const RootLayout = ({
         <div className="[--header-height:calc(theme(spacing.14))]">
           <SidebarProvider className="flex flex-col">
             <SiteHeader />
-            <div className="flex flex-1">
+            <div className="flex flex-1 max-w-[1538px]">
               <AppSidebar />
               <SidebarInset>{children}</SidebarInset>
             </div>
