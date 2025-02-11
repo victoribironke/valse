@@ -20,7 +20,8 @@ const SiteHeader = () => {
   const pathname = usePathname();
 
   const mapping = {
-    [PAGES.top]: "Top",
+    [PAGES.top_artists]: "Top artists",
+    [PAGES.top_tracks]: "Top tracks",
     [PAGES.stats]: "Statistics",
   };
 

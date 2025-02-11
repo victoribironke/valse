@@ -1,7 +1,7 @@
 "use client";
 
 import CurrentlyPlayingPlaceholder from "@/components/currently-playing-placeholder";
-import TableRowComp from "@/components/table-row";
+import TableRowComp from "@/components/recently-played-table-row";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Table,
@@ -56,7 +56,7 @@ const Page = () => {
                   </p>
                 </Marquee>
               ) : (
-                <p className="text-xl font-semibold whitespace-nowrap pr-80">
+                <p className="text-xl font-semibold whitespace-nowrap">
                   {currData.title}
                 </p>
               )}

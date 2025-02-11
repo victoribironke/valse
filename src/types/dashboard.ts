@@ -13,13 +13,16 @@ export type TopTrack = {
   pos: number;
   image_src: string;
   title: string;
-  artist: string;
+  artists: string[];
+  album: string;
 };
 
 export type TopArtist = {
   pos: number;
   image_src: string;
   artist: string;
+  followers: number;
+  genres: string[];
 };
 
 export type CurrentlyPlayingTrack = {

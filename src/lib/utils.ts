@@ -69,3 +69,5 @@ export const getTimeSince = (isoString: string) => {
     return "less than a minute";
   }
 };
+
+export const formatNumber = (n: number) => new Intl.NumberFormat().format(n);

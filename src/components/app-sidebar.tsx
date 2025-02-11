@@ -8,8 +8,10 @@ import {
   House,
   LifeBuoy,
   LogOut,
+  Music2,
   Send,
   TrendingUp,
+  User,
 } from "lucide-react";
 import { MainNav } from "@/components/main-nav";
 import { BottomNav } from "@/components/botton-nav";
@@ -37,8 +39,20 @@ const data = {
     },
     {
       title: "Top",
-      url: PAGES.top,
+      url: "",
       icon: TrendingUp,
+      items: [
+        {
+          title: "Tracks",
+          url: PAGES.top_tracks,
+          icon: Music2,
+        },
+        {
+          title: "Artists",
+          url: PAGES.top_artists,
+          icon: User,
+        },
+      ],
     },
     {
       title: "Stats",
