@@ -2,7 +2,7 @@ import { Skeleton } from "./ui/skeleton";
 
 const CurrentlyPlayingPlaceholder = () => {
   return (
-    <div className="h-auto rounded-xl bg-muted/50 p-4 border">
+    <div className="h-auto rounded-xl bg-muted/50 p-4 border max-w-2xl">
       <div className="w-full flex gap-4 mb-4">
         <Skeleton className="h-16 w-16 rounded-lg" />
 

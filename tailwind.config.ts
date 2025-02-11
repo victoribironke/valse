@@ -9,6 +9,21 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        marquee: "marquee linear infinite",
+        marquee2: "marquee2 linear infinite",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        marquee2: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-200%)" },
+        },
+      },
+
       colors: {
         main: "#22c55e",
         red: "#ef4444",

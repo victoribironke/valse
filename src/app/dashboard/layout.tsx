@@ -58,17 +58,17 @@ const RootLayout = ({
       <body className="antialiased dark">
         <QueryClientProvider client={queryClient}>
           <div className="[--header-height:calc(theme(spacing.14))]">
-            <SidebarProvider className="flex flex-col">
-              <SiteHeader />
-              {loading ? (
-                <PageLoader fullScreen />
-              ) : (
+            {loading ? (
+              <PageLoader fullScreen />
+            ) : (
+              <SidebarProvider className="flex flex-col">
+                <SiteHeader />
                 <div className="flex flex-1 max-w-[1600px]">
                   <AppSidebar />
                   <SidebarInset>{children}</SidebarInset>
                 </div>
-              )}
-            </SidebarProvider>
+              </SidebarProvider>
+            )}
           </div>
         </QueryClientProvider>
       </body>

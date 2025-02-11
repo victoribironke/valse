@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { useGetCurrentlyPlaying, useGetRecentlyPlayed } from "@/lib/spotify";
 import { msToHMS } from "@/lib/utils";
+import Marquee from "react-fast-marquee";
 import { Clock3 } from "lucide-react";
 
 const Page = () => {
@@ -31,7 +32,7 @@ const Page = () => {
       {currLoading ? (
         <CurrentlyPlayingPlaceholder />
       ) : currData ? (
-        <div className="h-auto rounded-xl bg-muted/50 p-4 border">
+        <div className="h-auto rounded-xl bg-muted/50 p-4 border max-w-2xl">
           <div className="w-full flex gap-4 mb-4">
             <Avatar className="h-16 w-16 rounded-lg">
               <AvatarImage
@@ -42,8 +43,24 @@ const Page = () => {
                 {currData.title.slice(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <div className="flex flex-col justify-center mr-auto">
-              <p className="text-xl font-semibold">{currData.title}</p>
+            <div className="flex flex-col justify-center mr-auto overflow-hidden">
+              {currData.title.length > 52 ? (
+                <Marquee
+                  speed={25}
+                  pauseOnHover={true}
+                  direction="left"
+                  pauseOnClick
+                >
+                  <p className="text-xl font-semibold whitespace-nowrap pr-80">
+                    {currData.title}
+                  </p>
+                </Marquee>
+              ) : (
+                <p className="text-xl font-semibold whitespace-nowrap pr-80">
+                  {currData.title}
+                </p>
+              )}
+
               <p className="text-sm text-muted-foreground">
                 {currData.artists.join(", ")}
               </p>
