@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,15 +16,17 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className="antialiased dark">
-        <Toaster
-          toastOptions={{
-            style: {
-              backgroundColor: "hsl(var(--muted) / 0.5)",
-              color: "#fff",
-            },
-          }}
-        />
-        {children}
+        <Suspense>
+          <Toaster
+            toastOptions={{
+              style: {
+                backgroundColor: "hsl(var(--muted) / 0.5)",
+                color: "#fff",
+              },
+            }}
+          />
+          {children}
+        </Suspense>
       </body>
     </html>
   );
