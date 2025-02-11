@@ -1,14 +1,8 @@
 "use client";
 
-import {
-  ChevronRight,
-  Music2,
-  TrendingUp,
-  type LucideIcon,
-} from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuAction,
   SidebarMenuButton,

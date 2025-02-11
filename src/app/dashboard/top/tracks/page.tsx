@@ -1,6 +1,5 @@
 "use client";
 
-import PageLoader from "@/components/page-loader";
 import TopItemsPlaceholder from "@/components/top-items-placeholder";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
