@@ -10,7 +10,7 @@ export const generateRandomString = (length: number) =>
 export const stringifyQuery = (data: any) => {
   const arr = [];
 
-  for (let i in data) arr.push(`${i}=${encodeURIComponent(data[i])}`);
+  for (const i in data) arr.push(`${i}=${encodeURIComponent(data[i])}`);
 
   return arr.join("&");
 };

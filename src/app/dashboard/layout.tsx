@@ -1,6 +1,6 @@
 "use client";
 
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import "../globals.css";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { SiteHeader } from "@/components/site-header";
@@ -41,7 +41,7 @@ const RootLayout = ({
       return;
     }
 
-    const { access_token, expires_at } = JSON.parse(data);
+    const { expires_at } = JSON.parse(data);
     const date_ms = new Date().getTime();
 
     if (date_ms >= expires_at) {
@@ -51,7 +51,7 @@ const RootLayout = ({
     }
 
     setLoading(false);
-  }, []);
+  }, [push]);
 
   return (
     <html lang="en">

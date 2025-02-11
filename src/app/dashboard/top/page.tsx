@@ -1,8 +1,6 @@
 "use client";
 
 import PageLoader from "@/components/page-loader";
-import { TopArtistComp, TopTrackComp } from "@/components/top";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 
@@ -11,7 +9,7 @@ const Page = () => {
   const durations = ["4 weeks", "6 months", "1 year"];
   const [tab, setTab] = useState("tracks");
   const [duration, setDuration] = useState("4 weeks");
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   if (loading) return <PageLoader fullScreen />;
 

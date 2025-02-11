@@ -13,11 +13,9 @@ import {
 } from "lucide-react";
 import { MainNav } from "@/components/main-nav";
 import { BottomNav } from "@/components/botton-nav";
-import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,

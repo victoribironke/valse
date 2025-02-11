@@ -4,10 +4,8 @@ import Spotify from "@/components/spotify";
 import { Button } from "@/components/ui/button";
 import { PAGES, REDIRECT_URI } from "@/constants/constants";
 import { generateRandomString, stringifyQuery } from "@/lib/utils";
-import Image from "next/image";
 import toast from "react-hot-toast";
 import { redirect, useRouter } from "next/navigation";
-import PageLoader from "@/components/page-loader";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -57,6 +55,7 @@ const Auth = () => {
 
       push(PAGES.dashboard);
     } catch (e) {
+      console.log(e);
       toast.error("A server error occured.");
     }
   };
@@ -90,7 +89,7 @@ const Auth = () => {
     setLoading(true);
 
     getAccessToken(code);
-  }, []);
+  }, [push, searchParams]);
 
   return (
     <section className="w-full p-6 flex items-center justify-center min-h-screen">

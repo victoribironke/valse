@@ -32,6 +32,7 @@ export const GET = async (req: NextRequest) => {
 
     return NextResponse.json({ data: spotifyAuthData }, { status: 200 });
   } catch (e) {
+    console.log(e);
     return NextResponse.json(
       { error: "A server error occured." },
       { status: 500 }

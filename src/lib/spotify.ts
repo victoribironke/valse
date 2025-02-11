@@ -1,7 +1,6 @@
-import { ENDPOINTS, PAGES, SPOTIFY_BASE_URL } from "@/constants/constants";
+import { ENDPOINTS } from "@/constants/constants";
 import { CurrentlyPlayingTrack, RecentlyPlayedTrack } from "@/types/dashboard";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 
 const { access_token: token, expires_at } = JSON.parse(
   localStorage.getItem("spotify_auth_data")!
@@ -43,7 +42,7 @@ export const useGetCurrentlyPlaying = () => {
       if (res.currently_playing_type === "track") {
         data = {
           title: res.item.name,
-          artists: res.item.artists.map((a: any) => a.name),
+          artists: res.item.artists.map((a: { name: string }) => a.name),
           is_local: res.item.is_local,
           duration: res.item.duration_ms,
           progress: res.progress_ms,
