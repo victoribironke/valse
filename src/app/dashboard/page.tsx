@@ -1,6 +1,7 @@
 "use client";
 
-import PageLoader from "@/components/page-loader";
+import CurrentlyPlayingPlaceholder from "@/components/currently-playing-placeholder";
+import TableRowComp from "@/components/table-row";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Table,
@@ -9,13 +10,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Clock3, MonitorSpeaker } from "lucide-react";
-import { useState } from "react";
+import { useGetCurrentlyPlaying, useGetRecentlyPlayed } from "@/lib/spotify";
+import { msToHMS } from "@/lib/utils";
+import { Clock3 } from "lucide-react";
 
 const Page = () => {
-  const [loading, setLoading] = useState(false);
+  const { data: currData, isLoading: currLoading } = useGetCurrentlyPlaying();
+  const { data: recData } = useGetRecentlyPlayed();
+  const progressBarwWidth =
+    ((currData?.progress as number) / (currData?.duration as number)) * 100;
 
-  if (loading) return <PageLoader fullScreen />;
+  // handle the error state, and when the data is null
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -23,34 +28,52 @@ const Page = () => {
         Currently playing
       </h2>
 
-      <div className="h-auto rounded-xl bg-muted/50 p-4 border">
-        <div className="w-full flex gap-4 mb-4">
-          <Avatar className="h-16 w-16 rounded-lg">
-            <AvatarImage src={"/"} alt={"props.album"} />
-            <AvatarFallback className="rounded-lg">AN</AvatarFallback>
-          </Avatar>
+      {currLoading ? (
+        <CurrentlyPlayingPlaceholder />
+      ) : currData ? (
+        <div className="h-auto rounded-xl bg-muted/50 p-4 border">
+          <div className="w-full flex gap-4 mb-4">
+            <Avatar className="h-16 w-16 rounded-lg">
+              <AvatarImage
+                src={currData.media_cover.src}
+                alt={currData.title}
+              />
+              <AvatarFallback className="rounded-lg">
+                {currData.title.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col justify-center mr-auto">
+              <p className="text-xl font-semibold">{currData.title}</p>
+              <p className="text-sm text-muted-foreground">
+                {currData.artists.join(", ")}
+              </p>
+            </div>
 
-          <div className="flex flex-col justify-center mr-auto">
-            <p className="text-xl font-semibold">JUBA</p>
-            <p className="text-sm text-muted-foreground">Anendlessocean</p>
-          </div>
-
-          {/* in the future, you will have to dynamically set the icon depending on the type of device connected */}
+            {/* in the future, you will have to dynamically set the icon depending on
+          the type of device connected
           <div className="flex gap-2 items-center justify-center text-sm text-main">
             <MonitorSpeaker size={20} />
             <p>DAMILOLA</p>
+          </div> */}
+          </div>
+
+          <div className="bg-gray-50 bg-opacity-20 rounded-full overflow-hidden mb-2">
+            <div
+              className="bg-main h-1.5 rounded-full"
+              style={{
+                width: `${progressBarwWidth}%`,
+              }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between text-muted-foreground text-sm">
+            <p className="text-main">{msToHMS(currData.progress)}</p>
+            <p>{msToHMS(currData.duration)}</p>
           </div>
         </div>
-
-        <div className="bg-gray-50 bg-opacity-20 rounded-full overflow-hidden mb-2">
-          <div className="bg-main h-1.5 w-1/2 rounded-full" />
-        </div>
-
-        <div className="flex items-center justify-between text-muted-foreground text-sm">
-          <p className="text-main">3:32</p>
-          <p>1:27</p>
-        </div>
-      </div>
+      ) : (
+        <CurrentlyPlayingPlaceholder />
+      )}
 
       <h2 className="text-main text-2xl md:text-3xl font-medium mt-4">
         Recently played
@@ -68,7 +91,16 @@ const Page = () => {
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody></TableBody>
+        <TableBody>
+          {recData?.map((r, i) => (
+            <TableRowComp
+              key={i}
+              track={r.track}
+              played_at={r.played_at}
+              n={i}
+            />
+          ))}
+        </TableBody>
       </Table>
     </div>
   );

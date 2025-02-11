@@ -7,21 +7,25 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { getTimeSince } from "@/lib/utils";
 
 const TableRowComp = (props: RecentlyPlayedTrack) => {
   return (
     <TableRow>
-      <TableCell>1</TableCell>
-      <TableCell className="font-medium">
+      <TableCell>{props.n + 1}</TableCell>
+      <TableCell className="font-medium whitespace-nowrap">
         <div className="flex items-center gap-2">
           <Avatar className="h-9 w-9 rounded-lg">
-            <AvatarImage src={props.album_cover_src} alt={props.album} />
+            <AvatarImage
+              src={props.track.album.images[0].url}
+              alt={props.track.name}
+            />
             <AvatarFallback className="rounded-lg">
-              {props.album.slice(0, 2).toUpperCase()}
+              {props.track.name.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>{" "}
-          {props.title}
-          {props.is_local && (
+          {props.track.name}
+          {props.track.is_local && (
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -37,10 +41,14 @@ const TableRowComp = (props: RecentlyPlayedTrack) => {
           )}
         </div>
       </TableCell>
-      <TableCell>{props.artists.join(", ")}</TableCell>
-      <TableCell>{props.album}</TableCell>
-      <TableCell className="text-right">
-        {props.duration} • {props.played_at} ago
+      <TableCell className="whitespace-nowrap">
+        {props.track.artists.map((a) => a.name).join(", ")}
+      </TableCell>
+      <TableCell className="whitespace-nowrap">
+        {props.track.album.name}
+      </TableCell>
+      <TableCell className="text-right whitespace-nowrap text-muted-foreground">
+        {getTimeSince(props.played_at)} ago
       </TableCell>
     </TableRow>
   );

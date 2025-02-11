@@ -17,7 +17,6 @@ const Auth = () => {
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-  const clientSecret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
   const { push } = useRouter();
 
   const login = async () => {
@@ -47,41 +46,29 @@ const Auth = () => {
 
   const getAccessToken = async (code: string) => {
     try {
-      const res = await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
+      const res = await fetch("/api/get-access-token?code=" + code, {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization:
-            "Basic " +
-            Buffer.from(clientId + ":" + clientSecret).toString("base64"),
+          "Content-Type": "application/json",
         },
-        body: new URLSearchParams({
-          code: code,
-          redirect_uri: REDIRECT_URI,
-          grant_type: "authorization_code",
-        }),
       });
+      const data = await res.json();
 
-      const { access_token, expires_in } = await res.json();
-
-      const date_ms = new Date().getTime();
-      const spotifyAuthData = {
-        access_token,
-        expires_at: date_ms + expires_in * 1000,
-      };
-      localStorage.setItem(
-        "spotify_auth_data",
-        JSON.stringify(spotifyAuthData)
-      );
+      localStorage.setItem("spotify_auth_data", JSON.stringify(data.data));
 
       push(PAGES.dashboard);
     } catch (e) {
-      console.log(e);
       toast.error("A server error occured.");
     }
   };
 
   useEffect(() => {
+    const data = localStorage.getItem("spotify_auth_data");
+
+    if (data) {
+      push(PAGES.dashboard);
+      return;
+    }
+
     const state = searchParams.get("state");
     const code = searchParams.get("code");
     const error = searchParams.get("error");

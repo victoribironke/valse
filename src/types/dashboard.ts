@@ -1,11 +1,12 @@
 export type RecentlyPlayedTrack = {
-  title: string;
-  artists: string[];
-  is_local: boolean;
-  album: string;
-  duration: string;
+  track: {
+    name: string;
+    artists: { name: string }[];
+    is_local: boolean;
+    album: { name: string; images: { url: string; w: number; h: number }[] };
+  };
   played_at: string;
-  album_cover_src: string;
+  n: number;
 };
 
 export type TopTrack = {
@@ -19,4 +20,14 @@ export type TopArtist = {
   pos: number;
   image_src: string;
   artist: string;
+};
+
+export type CurrentlyPlayingTrack = {
+  title: string;
+  artists: string[];
+  is_local: boolean;
+  duration: number;
+  progress: number;
+  // device: { name: string; type: "computer" | "smartphone" | "speaker" };
+  media_cover: { src: string; w: number; h: number };
 };
