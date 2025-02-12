@@ -18,6 +18,8 @@ const BottomNav = ({
     title: string;
     url: string;
     icon: LucideIcon;
+    is_button?: boolean;
+    action?: () => void;
   }[];
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) => {
   return (
@@ -27,10 +29,17 @@ const BottomNav = ({
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild size="default">
-                <Link href={item.url}>
-                  <item.icon />
-                  <span>{item.title}</span>
-                </Link>
+                {item.is_button ? (
+                  <div onClick={item.action} className="cursor-pointer">
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </div>
+                ) : (
+                  <Link href={item.url}>
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </Link>
+                )}
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}

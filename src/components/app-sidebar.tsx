@@ -24,6 +24,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { PAGES } from "@/constants/constants";
+import { logOut } from "@/lib/auth";
 
 const data = {
   user: {
@@ -80,6 +81,8 @@ const data = {
       title: "Log out",
       url: "#",
       icon: LogOut,
+      is_button: true,
+      action: logOut,
     },
   ],
 };
