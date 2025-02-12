@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { PAGES } from "@/constants/constants";
 import PageLoader from "@/components/page-loader";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { saveNewUser } from "@/lib/auth";
 
 // export const metadata: Metadata = {
 //   title: "Home ~ Valse",
@@ -41,7 +42,7 @@ const RootLayout = ({
       return;
     }
 
-    const { expires_at } = JSON.parse(data);
+    const { access_token, expires_at } = JSON.parse(data);
     const date_ms = new Date().getTime();
 
     if (date_ms >= expires_at) {
@@ -49,6 +50,8 @@ const RootLayout = ({
       push(PAGES.auth);
       return;
     }
+
+    saveNewUser(access_token);
 
     setLoading(false);
   }, [push]);

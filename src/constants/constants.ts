@@ -19,4 +19,5 @@ export const ENDPOINTS = {
   get_recently_played: SPOTIFY_BASE_URL + "/v1/me/player/recently-played",
   get_top_items: (i: "artists" | "tracks") =>
     SPOTIFY_BASE_URL + `/v1/me/top/${i}`,
+  get_user_profile: SPOTIFY_BASE_URL + "/v1/me",
 };

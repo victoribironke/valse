@@ -9,13 +9,14 @@ import { redirect, useRouter } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { getAccessToken } from "@/lib/auth";
 
 const Auth = () => {
   const stateKey = "spotify_auth_state";
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
-  const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
   const { push } = useRouter();
+  const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
 
   const login = async () => {
     const state = generateRandomString(16);
@@ -25,6 +26,7 @@ const Auth = () => {
       "user-top-read",
       "user-read-recently-played",
       "user-read-email",
+      "user-read-private",
     ].join(" ");
 
     localStorage.setItem(stateKey, state);
@@ -42,31 +44,10 @@ const Auth = () => {
     redirect(url);
   };
 
-  const getAccessToken = async (code: string) => {
-    try {
-      const res = await fetch("/api/get-access-token?code=" + code, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-
-      localStorage.setItem("spotify_auth_data", JSON.stringify(data.data));
-
-      push(PAGES.dashboard);
-    } catch (e) {
-      console.log(e);
-      toast.error("A server error occured.");
-    }
-  };
-
   useEffect(() => {
     const data = localStorage.getItem("spotify_auth_data");
 
-    if (data) {
-      push(PAGES.dashboard);
-      return;
-    }
+    if (data) redirect(PAGES.dashboard);
 
     const state = searchParams.get("state");
     const code = searchParams.get("code");
@@ -88,8 +69,8 @@ const Auth = () => {
 
     setLoading(true);
 
-    getAccessToken(code);
-  }, [push, searchParams]);
+    getAccessToken(code, push);
+  }, [searchParams]);
 
   return (
     <section className="w-full p-6 flex items-center justify-center min-h-screen">

@@ -34,3 +34,12 @@ export type CurrentlyPlayingTrack = {
   // device: { name: string; type: "computer" | "smartphone" | "speaker" };
   media_cover: { src: string; w: number; h: number };
 };
+
+export type User = {
+  country: string;
+  display_name: string;
+  email: string;
+  followers: number;
+  profile_pic: string;
+  credits: number;
+};
