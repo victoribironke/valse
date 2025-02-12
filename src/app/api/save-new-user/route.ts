@@ -32,6 +32,7 @@ export const POST = async (req: NextRequest) => {
       credits: 3,
       display_name: data.display_name,
       email: data.email,
+      user_id: data.id,
       followers: data.followers.total,
       profile_pic: data.images[0].url,
     };

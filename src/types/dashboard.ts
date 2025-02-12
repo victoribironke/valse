@@ -41,5 +41,6 @@ export type User = {
   email: string;
   followers: number;
   profile_pic: string;
+  user_id: string;
   credits: number;
 };
