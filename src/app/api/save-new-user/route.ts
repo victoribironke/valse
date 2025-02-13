@@ -2,7 +2,7 @@ import { ENDPOINTS } from "@/constants/constants";
 import { auth, db } from "@/services/firebase";
 import { User } from "@/types/dashboard";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
@@ -24,6 +24,15 @@ export const POST = async (req: NextRequest) => {
     const user = await getDoc(doc(db, "users", data.email));
 
     if (user.exists()) {
+      await updateDoc(doc(db, "users", data.email), {
+        country: data.country,
+        display_name: data.display_name,
+        email: data.email,
+        user_id: data.id,
+        followers: data.followers.total,
+        profile_pic: data.images[0].url,
+      });
+
       return NextResponse.json({ user }, { status: 200 });
     }
 
