@@ -28,12 +28,15 @@ export const getAccessToken = async (code: string, push: any) => {
 
 export const saveNewUser = async (token: string) => {
   try {
-    await fetch("/api/save-new-user?token=" + token, {
+    const res = await fetch("/api/save-new-user?token=" + token, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
     });
+    const data = await res.json();
+
+    localStorage.setItem("valse_user_data", JSON.stringify(data.userData));
 
     return { error: null };
   } catch (e) {

@@ -14,21 +14,17 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en">
-      <body className="antialiased dark">
-        <Suspense>
-          <Toaster
-            toastOptions={{
-              style: {
-                backgroundColor: "hsl(var(--muted) / 0.5)",
-                color: "#fff",
-              },
-            }}
-          />
-          {children}
-        </Suspense>
-      </body>
-    </html>
+    <Suspense>
+      <Toaster
+        toastOptions={{
+          style: {
+            backgroundColor: "hsl(var(--muted) / 0.5)",
+            color: "#fff",
+          },
+        }}
+      />
+      {children}
+    </Suspense>
   );
 };
 

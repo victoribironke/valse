@@ -1,4 +1,5 @@
 import { ENDPOINTS } from "@/constants/constants";
+import { db } from "@/services/firebase";
 import {
   CurrentlyPlayingTrack,
   RecentlyPlayedTrack,
@@ -6,6 +7,7 @@ import {
   TopTrack,
 } from "@/types/dashboard";
 import { useQuery } from "@tanstack/react-query";
+import { doc, getDoc } from "firebase/firestore";
 
 const { access_token: token, expires_at } = JSON.parse(
   localStorage.getItem("spotify_auth_data")!

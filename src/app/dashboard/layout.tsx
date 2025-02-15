@@ -3,8 +3,6 @@
 // import type { Metadata } from "next";
 import "../globals.css";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { SiteHeader } from "@/components/site-header";
-import { AppSidebar } from "@/components/app-sidebar";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PAGES } from "@/constants/constants";
@@ -57,25 +55,19 @@ const RootLayout = ({
   }, [push]);
 
   return (
-    <html lang="en">
-      <body className="antialiased dark">
-        <QueryClientProvider client={queryClient}>
-          <div className="[--header-height:calc(theme(spacing.14))]">
-            {loading ? (
-              <PageLoader fullScreen />
-            ) : (
-              <SidebarProvider className="flex flex-col">
-                <SiteHeader />
-                <div className="flex flex-1 max-w-[1600px]">
-                  <AppSidebar />
-                  <SidebarInset>{children}</SidebarInset>
-                </div>
-              </SidebarProvider>
-            )}
-          </div>
-        </QueryClientProvider>
-      </body>
-    </html>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <main className="[--header-height:calc(theme(spacing.14))] flex items-center justify-center p-6 md:py-12">
+          {loading ? (
+            <PageLoader fullScreen />
+          ) : (
+            <div className="w-full bordr max-w-5xl flex items-center justify-center flex-col gap-6">
+              {children}
+            </div>
+          )}
+        </main>
+      </QueryClientProvider>
+    </>
   );
 };
 

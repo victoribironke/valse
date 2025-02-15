@@ -21,12 +21,14 @@ const Auth = () => {
   const login = async () => {
     const state = generateRandomString(16);
     const scope = [
-      "user-read-playback-state",
-      "user-read-currently-playing",
-      "user-top-read",
-      "user-read-recently-played",
+      // "user-read-playback-state",
+      // "user-read-currently-playing",
+      // "user-top-read",
+      // "user-read-recently-played",
       "user-read-email",
       "user-read-private",
+      "playlist-read-private",
+      "playlist-read-collaborative",
     ].join(" ");
 
     localStorage.setItem(stateKey, state);

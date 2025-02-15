@@ -33,7 +33,7 @@ export const POST = async (req: NextRequest) => {
         profile_pic: data.images[0].url,
       });
 
-      return NextResponse.json({ user }, { status: 200 });
+      return NextResponse.json({ userData: user.data() }, { status: 200 });
     }
 
     const userData: User = {
