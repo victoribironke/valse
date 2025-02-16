@@ -1,7 +1,6 @@
 import { PAGES } from "@/constants/constants";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
-import { cookies } from "next/headers";
 
 export const logOut = () => {
   localStorage.removeItem("spotify_auth_data");

@@ -12,12 +12,6 @@ import {
 import { useGetPlaylistItems } from "@/lib/requests";
 import { msToHMS } from "@/lib/utils";
 import { Clock3 } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
 const Page = ({ params }: { params: { id: string } }) => {
@@ -29,6 +23,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         <h1 className="text-main font-medium text-2xl md:text-3xl">Tracks</h1>
 
         <Button variant="outline">Sort playlist</Button>
+        {/* SHOW A DIALOG TO MAKE SURE THEY KNOW WHAT THEY ARE DOING, THAT IT WILL USE ONE OF THEIR CREDITS */}
       </div>
 
       <div className="bg-muted/50 p-4 rounded-xl w-full">

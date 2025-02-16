@@ -2,7 +2,6 @@
 
 // import type { Metadata } from "next";
 import "../globals.css";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PAGES } from "@/constants/constants";

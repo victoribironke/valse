@@ -4,7 +4,6 @@ import Spotify from "@/components/spotify";
 import { Button } from "@/components/ui/button";
 import { PAGES, REDIRECT_URI } from "@/constants/constants";
 import { generateRandomString, stringifyQuery } from "@/lib/utils";
-import toast from "react-hot-toast";
 import { redirect, useRouter } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
