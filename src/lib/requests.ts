@@ -62,7 +62,7 @@ export const useGetPlaylistItems = (id: string) => {
   const params = "?limit=50";
 
   const { error, data, refetch, isFetching } = useQuery({
-    queryKey: ["getPlaylistItems"],
+    queryKey: ["getPlaylistItems", id],
     queryFn: async () => {
       const isVerified = verifyAuthState();
 
@@ -77,29 +77,21 @@ export const useGetPlaylistItems = (id: string) => {
       if (!r.ok) throw new Error(`API error: ${r.status}`);
 
       const res = await r.json();
-      // console.log(res.items.map((i: any) => i.track));
 
-      const data: Track[] = res.items
-        .map((i: any) => i.track)
-        .map((i: any): Track => {
-          if (i.type === "track") {
-            return {
-              album: i.album.name,
-              artist: i.artists.map((a: any) => a.name).join(", "),
-              duration: i.duration_ms,
-              title: i.name,
-              image_src: i.album.images ? i.album.images[0].url : null,
-            };
-          }
-
-          return {
-            album: i.album.name,
-            artist: i.artists.map((a: any) => a.type).join(", "),
-            duration: i.duration_ms,
-            image_src: i.album.images ? i.album.images[0].url : null,
-            title: i.name,
-          };
-        });
+      const data: Track[] = res.items.map((i: any): Track => {
+        return {
+          album: i.track.album.name,
+          artist: i.track.artists
+            .map((a: any) => (i.track.type === "track" ? a.name : a.type))
+            .join(", "),
+          duration: i.track.duration_ms,
+          image_src: i.track.album.images[0]
+            ? i.track.album.images[0].url
+            : null,
+          title: i.track.name,
+          is_local: i.is_local,
+        };
+      });
 
       return data;
     },

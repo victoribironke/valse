@@ -13,18 +13,36 @@ import { useGetPlaylistItems } from "@/lib/requests";
 import { msToHMS } from "@/lib/utils";
 import { Clock3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 const Page = ({ params }: { params: { id: string } }) => {
   const { data } = useGetPlaylistItems(params.id);
+  const [isNotEligible, setIsNotEligible] = useState(false);
+
+  useEffect(() => {
+    const localFiles = data?.filter((d) => d.is_local) || [];
+
+    if (localFiles.length > 0) setIsNotEligible(true);
+  }, [data]);
 
   return (
     <>
       <div className="w-full flex items-center justify-between">
         <h1 className="text-main font-medium text-2xl md:text-3xl">Tracks</h1>
 
-        <Button variant="outline">Sort playlist</Button>
+        <Button variant="outline" disabled={isNotEligible}>
+          Sort playlist
+        </Button>
         {/* SHOW A DIALOG TO MAKE SURE THEY KNOW WHAT THEY ARE DOING, THAT IT WILL USE ONE OF THEIR CREDITS */}
       </div>
+
+      {isNotEligible && (
+        <p>
+          This playlist is not able to be sorted.{" "}
+          <span className="border-b">Learn more</span>
+        </p>
+        // THIS SHOULD LINK TO THE HELP PAGE WHERE YOU TELL THEM THE THINGS YOU NEED TO TELL THEM
+      )}
 
       <div className="bg-muted/50 p-4 rounded-xl w-full">
         <Table>
@@ -34,7 +52,7 @@ const Page = ({ params }: { params: { id: string } }) => {
               <TableHead>Title</TableHead>
               <TableHead>Artist(s)</TableHead>
               <TableHead>Album</TableHead>
-              <TableHead className="flex justify-end items-center">
+              <TableHead>
                 <Clock3 size={18} />
               </TableHead>
             </TableRow>
@@ -46,6 +64,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 
                 <TableCell className="font-medium whitespace-nowrap">
                   <div className="flex items-center gap-2">
+                    {/* CHECK IF THE IMAGE SRC IS NULL, IF YES, RENDER A PLACEHOLDER */}
                     <Avatar className="h-8 w-8 rounded-lg">
                       <AvatarImage src={d.image_src} alt="Track cover" />
                       <AvatarFallback className="rounded-lg">

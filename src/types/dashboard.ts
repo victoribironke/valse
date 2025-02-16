@@ -21,4 +21,5 @@ export type Track = {
   album: string;
   duration: number;
   image_src: string;
+  is_local: boolean;
 };
