@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "450px",
+      },
+
       animation: {
         marquee: "marquee linear infinite",
         marquee2: "marquee2 linear infinite",

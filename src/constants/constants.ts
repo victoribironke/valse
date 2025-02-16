@@ -7,17 +7,12 @@ export const SPOTIFY_BASE_URL = "https://api.spotify.com";
 
 export const PAGES = {
   dashboard: "/dashboard",
-  top_tracks: "/dashboard/top/tracks",
-  top_artists: "/dashboard/top/artists",
-  stats: "/dashboard/stats",
+  playlist: (id: string) => `/dashboard/p/${id}`,
 
   auth: "/auth",
 };
 
 export const ENDPOINTS = {
-  get_currently_playing: SPOTIFY_BASE_URL + "/v1/me/player/currently-playing",
-  get_recently_played: SPOTIFY_BASE_URL + "/v1/me/player/recently-played",
-  get_top_items: (i: "artists" | "tracks") =>
-    SPOTIFY_BASE_URL + `/v1/me/top/${i}`,
+  get_playlists: SPOTIFY_BASE_URL + "/v1/me/playlists",
   get_user_profile: SPOTIFY_BASE_URL + "/v1/me",
 };

@@ -9,6 +9,7 @@ import { PAGES } from "@/constants/constants";
 import PageLoader from "@/components/page-loader";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { saveNewUser } from "@/lib/auth";
+import DashboardHeader from "@/components/dashboard-header";
 
 // export const metadata: Metadata = {
 //   title: "Home ~ Valse",
@@ -57,11 +58,12 @@ const RootLayout = ({
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <main className="[--header-height:calc(theme(spacing.14))] flex items-center justify-center p-6 md:py-12">
+        <main className="[--header-height:calc(theme(spacing.14))] flex items-center justify-center p-6">
           {loading ? (
             <PageLoader fullScreen />
           ) : (
-            <div className="w-full bordr max-w-5xl flex items-center justify-center flex-col gap-6">
+            <div className="w-full max-w-5xl flex items-center justify-center flex-col gap-6">
+              <DashboardHeader />
               {children}
             </div>
           )}
