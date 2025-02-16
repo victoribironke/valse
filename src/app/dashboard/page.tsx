@@ -13,7 +13,7 @@ const Page = () => {
 
   return (
     <>
-      <h1 className="text-main font-medium text-3xl text-left w-full">
+      <h1 className="text-main font-medium text-2xl md:text-3xl text-left w-full">
         Your playlists
       </h1>
 

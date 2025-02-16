@@ -1,7 +1,7 @@
 import { ENDPOINTS } from "@/constants/constants";
 import { useQuery } from "@tanstack/react-query";
 import { logOut } from "./auth";
-import { Playlist } from "@/types/dashboard";
+import { Playlist, Track } from "@/types/dashboard";
 
 const { access_token: token, expires_at } = JSON.parse(
   localStorage.getItem("spotify_auth_data")!
@@ -47,6 +47,58 @@ export const useGetPlaylists = () => {
             snapshot_id: i.snapshot_id,
             title: i.name,
           } as Playlist;
+        });
+
+      return data;
+    },
+    refetchInterval: false,
+  });
+
+  return { error, data, refetch, isFetching };
+};
+
+export const useGetPlaylistItems = (id: string) => {
+  const url = ENDPOINTS.get_playlist_items(id);
+  const params = "?limit=50";
+
+  const { error, data, refetch, isFetching } = useQuery({
+    queryKey: ["getPlaylistItems"],
+    queryFn: async () => {
+      const isVerified = verifyAuthState();
+
+      if (!isVerified) logOut();
+
+      const r = await fetch(url + params, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (r.status === 204) return [];
+
+      if (!r.ok) throw new Error(`API error: ${r.status}`);
+
+      const res = await r.json();
+      // console.log(res.items.map((i: any) => i.track));
+
+      const data: Track[] = res.items
+        .map((i: any) => i.track)
+        .map((i: any): Track => {
+          if (i.type === "track") {
+            return {
+              album: i.album.name,
+              artist: i.artists.map((a: any) => a.name).join(", "),
+              duration: i.duration_ms,
+              title: i.name,
+              image_src: i.album.images ? i.album.images[0].url : null,
+            };
+          }
+
+          return {
+            album: i.album.name,
+            artist: i.artists.map((a: any) => a.type).join(", "),
+            duration: i.duration_ms,
+            image_src: i.album.images ? i.album.images[0].url : null,
+            title: i.name,
+          };
         });
 
       return data;

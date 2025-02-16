@@ -88,3 +88,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+div:has(> table:first-child) {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+div:has(> table:first-child)::-webkit-scrollbar {
+  display: none;
+}

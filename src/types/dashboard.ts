@@ -14,3 +14,11 @@ export type User = {
   user_id: string;
   credits: number;
 };
+
+export type Track = {
+  title: string;
+  artist: string;
+  album: string;
+  duration: number;
+  image_src: string;
+};

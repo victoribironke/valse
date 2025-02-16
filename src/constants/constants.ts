@@ -14,5 +14,7 @@ export const PAGES = {
 
 export const ENDPOINTS = {
   get_playlists: SPOTIFY_BASE_URL + "/v1/me/playlists",
+  get_playlist_items: (id: string) =>
+    SPOTIFY_BASE_URL + `/v1/playlists/${id}/tracks`,
   get_user_profile: SPOTIFY_BASE_URL + "/v1/me",
 };
