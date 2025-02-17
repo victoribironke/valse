@@ -38,7 +38,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 
       {isNotEligible && (
         <p>
-          This playlist is not able to be sorted.{" "}
+          This playlist cannot be sorted.{" "}
           <span className="border-b">Learn more</span>
         </p>
         // THIS SHOULD LINK TO THE HELP PAGE WHERE YOU TELL THEM THE THINGS YOU NEED TO TELL THEM
