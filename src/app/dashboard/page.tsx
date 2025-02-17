@@ -19,25 +19,22 @@ const Page = () => {
 
       <div className="grid gap-6 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full">
         {data?.map((d, i) => (
-          <div
-            className="w-full bg-muted p-3 rounded-xl flex flex-col gap-3"
-            key={i}
-          >
-            {d.image_src ? (
-              <div className="w-full aspect-square rounded-lg overflow-hidden">
-                <img src={d.image_src} alt={d.title} className="w-full" />
-              </div>
-            ) : (
-              <PlaylistImagePlaceholder />
-            )}
-
-            <Link
-              href={PAGES.playlist(d.playlist_id)}
-              className="hover:text-main"
+          <Link href={PAGES.playlist(d.playlist_id)} className="group">
+            <div
+              className="w-full bg-muted p-3 rounded-xl flex flex-col gap-3"
+              key={i}
             >
-              {d.title}
-            </Link>
-          </div>
+              {d.image_src ? (
+                <div className="w-full aspect-square rounded-lg overflow-hidden">
+                  <img src={d.image_src} alt={d.title} className="w-full" />
+                </div>
+              ) : (
+                <PlaylistImagePlaceholder />
+              )}
+
+              <p className="group-hover:text-main">{d.title}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </>
