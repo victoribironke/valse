@@ -14,6 +14,7 @@ import { msToHMS } from "@/lib/utils";
 import { Clock3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import SortPlaylist from "@/components/sort-playlist";
 
 const Page = ({ params }: { params: { id: string } }) => {
   const { data } = useGetPlaylistItems(params.id);
@@ -30,10 +31,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       <div className="w-full flex items-center justify-between">
         <h1 className="text-main font-medium text-2xl md:text-3xl">Tracks</h1>
 
-        <Button variant="outline" disabled={isNotEligible}>
-          Sort playlist
-        </Button>
-        {/* SHOW A DIALOG TO MAKE SURE THEY KNOW WHAT THEY ARE DOING, THAT IT WILL USE ONE OF THEIR CREDITS */}
+        <SortPlaylist id={params.id} isNotEligible={isNotEligible} />
       </div>
 
       {isNotEligible && (
