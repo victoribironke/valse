@@ -17,4 +17,6 @@ export const ENDPOINTS = {
   get_playlist_items: (id: string) =>
     SPOTIFY_BASE_URL + `/v1/playlists/${id}/tracks`,
   get_user_profile: SPOTIFY_BASE_URL + "/v1/me",
+  get_tracks_audio_features: (ids: string) =>
+    SPOTIFY_BASE_URL + `/v1/audio-features?ids=${ids}`,
 };

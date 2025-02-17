@@ -90,6 +90,7 @@ export const useGetPlaylistItems = (id: string) => {
             : null,
           title: i.track.name,
           is_local: i.is_local,
+          track_id: i.track.id,
         };
       });
 
@@ -99,4 +100,26 @@ export const useGetPlaylistItems = (id: string) => {
   });
 
   return { error, data, refetch, isFetching };
+};
+
+export const sortPlaylist = async (id: string, tracks: string[]) => {
+  try {
+    const res = await fetch("/api/sort-playlist?token=" + token, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        playlist_id: id,
+        tracks: tracks,
+      }),
+    });
+    const data = await res.json();
+
+    // localStorage.setItem("valse_user_data", JSON.stringify(data.userData));
+
+    return { data: "", error: null };
+  } catch (e) {
+    return { data: null, error: e };
+  }
 };

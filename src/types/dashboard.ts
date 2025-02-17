@@ -22,4 +22,5 @@ export type Track = {
   duration: number;
   image_src: string;
   is_local: boolean;
+  track_id: string;
 };

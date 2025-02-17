@@ -10,13 +10,29 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { sortPlaylist } from "@/lib/requests";
+import { LoaderCircle } from "lucide-react";
+import { useState } from "react";
 
 type SortPlaylistProps = {
   id: string;
   isNotEligible: boolean;
+  tracks: string[];
 };
 
-const SortPlaylist = ({ id, isNotEligible }: SortPlaylistProps) => {
+const SortPlaylist = ({ id, isNotEligible, tracks }: SortPlaylistProps) => {
+  const [loading, setLoading] = useState(false);
+
+  const sort = async () => {
+    setLoading(true);
+
+    const { data, error } = await sortPlaylist(id, tracks);
+
+    console.log(data, error);
+
+    setLoading(false);
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -38,9 +54,10 @@ const SortPlaylist = ({ id, isNotEligible }: SortPlaylistProps) => {
           <AlertDialogCancel className="w-full">Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="w-full bg-main text-white hover:bg-main/90 hover:text-white"
-            onClick={() => alert("sorted")}
+            onClick={sort}
+            disabled={loading}
           >
-            Continue
+            {loading && <LoaderCircle className="animate-spin" />} Continue
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

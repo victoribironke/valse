@@ -31,7 +31,11 @@ const Page = ({ params }: { params: { id: string } }) => {
       <div className="w-full flex items-center justify-between">
         <h1 className="text-main font-medium text-2xl md:text-3xl">Tracks</h1>
 
-        <SortPlaylist id={params.id} isNotEligible={isNotEligible} />
+        <SortPlaylist
+          id={params.id}
+          isNotEligible={isNotEligible}
+          tracks={data?.map((d) => d.track_id) || []}
+        />
       </div>
 
       {isNotEligible && (
